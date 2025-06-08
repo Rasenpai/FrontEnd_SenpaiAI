@@ -176,18 +176,19 @@ function App() {
     };
     setMessages((prev) => [...prev, loadingMessage]);
 
-    const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
-
     try {
       const formData = new FormData();
       formData.append("message", userInput);
       files.forEach((file) => {
         formData.append("files", file); // file should be the actual File object
       });
-      const res = await fetch(`${BackEndUrl}/ask`, {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        "https://backendsenpaiai-production.up.railway.app/ask",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await res.json();
 
