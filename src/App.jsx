@@ -8,7 +8,6 @@ import {
   File,
   Eye,
 } from "lucide-react";
-  
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -177,19 +176,20 @@ function App() {
     };
     setMessages((prev) => [...prev, loadingMessage]);
 
+    const BackEndUrl = import.meta.env.VITE_BACKEND_URL;
+
     try {
       const formData = new FormData();
       formData.append("message", userInput);
       files.forEach((file) => {
         formData.append("files", file); // file should be the actual File object
       });
-      const res = await fetch("http://localhost:5000/ask", {
+      const res = await fetch(`${BackEndUrl}/ask`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          formData,
           message: userInput,
           files: files.map((f) => ({
             name: f.name,
