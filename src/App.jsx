@@ -186,17 +186,7 @@ function App() {
       });
       const res = await fetch(`${BackEndUrl}/ask`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          message: userInput,
-          files: files.map((f) => ({
-            name: f.name,
-            type: f.type,
-            size: f.size,
-          })),
-        }),
+        body: formData,
       });
 
       const data = await res.json();
